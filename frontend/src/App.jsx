@@ -15,25 +15,28 @@ const App = () => {
   }, []);
 
   const fetchTasks = async () => {
-    const res = await axios.get("http://localhost:5000/api/tasks");
+    const res = await axios.get("https://uprio-4otg.onrender.com/api/tasks");
     setTasks(res.data);
   };
 
   const createTask = async (task) => {
-    await axios.post("http://localhost:5000/api/tasks", task);
+    await axios.post("https://uprio-4otg.onrender.com/api/tasks", task);
     toast.success("Task created!");
     fetchTasks();
   };
 
   const updateTask = async (task) => {
-    await axios.put(`http://localhost:5000/api/tasks/${editingTask._id}`, task);
+    await axios.put(
+      `https://uprio-4otg.onrender.com/api/tasks/${editingTask._id}`,
+      task
+    );
     toast.success("Task updated!");
     setEditingTask(null);
     fetchTasks();
   };
 
   const deleteTask = async (id) => {
-    await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+    await axios.delete(`https://uprio-4otg.onrender.com/api/tasks/${id}`);
     toast.error("Task deleted!");
     fetchTasks();
   };

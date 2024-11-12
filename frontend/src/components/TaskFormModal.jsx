@@ -1,32 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 
 const TaskFormModal = ({ task, isOpen, onClose, onSave }) => {
-  const [title, setTitle] = useState(task?.title || "");
-  const [description, setDescription] = useState(task?.description || "");
-  const [dueDate, setDueDate] = useState(task?.dueDate || "");
-  const [isCompleted, setIsCompleted] = useState(task?.isCompleted || false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [isCompleted, setIsCompleted] = useState(false);
+
+
+  useEffect(() => {
+    if (isOpen) {
+      setTitle(task?.title || "");
+      setDescription(task?.description || "");
+      setDueDate(task?.dueDate || "");
+      setIsCompleted(task?.isCompleted || false);
+    }
+  }, [isOpen, task]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const taskData = { title, description, dueDate, isCompleted };
     onSave(taskData);
+    handleReset();
     onClose();
+  };
+
+  const handleReset = () => {
+    setTitle("");
+    setDescription("");
+    setDueDate("");
+    setIsCompleted(false);
   };
 
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onClose}
+      onRequestClose={() => {
+        handleReset();
+        onClose();
+      }}
       className="modal-content"
       overlayClassName="modal-overlay"
     >
       <div className="relative bg-white p-8 rounded-lg shadow-md w-full max-w-lg mx-auto">
-        {/* Close Button */}
         <button
-          onClick={onClose}
+          onClick={() => {
+            handleReset();
+            onClose();
+          }}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
           aria-label="Close Modal"
         >
