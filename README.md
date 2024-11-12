@@ -1,6 +1,6 @@
 # To-Do App
 
-This is a **To-Do App** built with **React**, **TypeScript**, and **Tailwind CSS**. The app allows users to manage tasks with full CRUD functionality, filtering, and sorting options, demonstrating both frontend and backend development skills.
+This is a **To-Do App** built with **React**, **JavaScript**, and **Tailwind CSS**. The app allows users to manage tasks with full CRUD functionality, filtering, and sorting options, demonstrating both frontend and backend development skills.
 
 ## Live Links
 
